@@ -15,7 +15,7 @@ namespace MIABase\Factory;
  */
 class TableFactory implements \Zend\ServiceManager\Factory\FactoryInterface
 {
-    public function __invoke(\Interop\Container\ContainerInterface $container, $requestedName, mixed $options = null)
+    public function __invoke(\Interop\Container\ContainerInterface $container, $requestedName, array $options = null)
     {
         return new $requestedName($container->get('Zend\Db\Adapter\Adapter'));
     }
