@@ -7,7 +7,7 @@ namespace MIABase\Controller\Api;
  *
  * @author matiascamiletti
  */
-abstract class CrudController extends \MIABase\Controller\BaseController
+abstract class CrudController extends BaseApiController
 {
     public function indexAction()
     {
