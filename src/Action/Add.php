@@ -11,11 +11,6 @@ use Zend\View\Model\ViewModel;
  */
 class Add extends Base
 {
-    /**
-     *
-     * @var \MIABase\Entity\Base
-     */
-    protected $model;
     
     protected function prepareForm()
     {
@@ -52,15 +47,6 @@ class Add extends Base
         $this->table->save($this->model);
         
         return $this->controller->redirect()->toRoute($this->route . '/list');
-    }
-    
-    protected function getModel()
-    {
-        if($this->model == null){
-            $className = $this->table->getEntityClass();
-            $this->model = new $className;
-        }
-        return $this->model;
     }
     
     public function execute()

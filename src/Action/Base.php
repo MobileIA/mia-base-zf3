@@ -34,6 +34,11 @@ abstract class Base
      * @var array
      */
     protected $options = array();
+    /**
+     *
+     * @var \MIABase\Entity\Base
+     */
+    protected $model;
     
     /**
      * Obtiene el valor guardado
@@ -60,6 +65,18 @@ abstract class Base
             $this->options[$key] = array(); 
         }
         $this->options[$key] = $value;
+    }
+    /**
+     * Crea el modelo Entidad
+     * @return mixed
+     */
+    protected function getModel()
+    {
+        if($this->model == null){
+            $className = $this->table->getEntityClass();
+            $this->model = new $className;
+        }
+        return $this->model;
     }
     
     abstract function execute();

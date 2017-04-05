@@ -68,4 +68,9 @@ abstract class BaseApiController extends \MIABase\Controller\BaseController
 
         return true;
     }
+    
+    public function getAllParams()
+    {
+        return $this->values;
+    }
 }
