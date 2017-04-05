@@ -15,15 +15,11 @@ abstract class BaseApiController extends \MIABase\Controller\BaseController
      */
     protected $values = array();
     /**
-     * Inicializador
-     * @param \Zend\Mvc\MvcEvent $e
+     *
+     * @var boolean
      */
-    public function onDispatch(\Zend\Mvc\MvcEvent $e)
-    {
-        parent::onDispatch($e);
-        // Procesar los parametros si es enviado como JSON.
-        $this->validateParams();
-    }
+    protected $hasValidateParams = false;
+    
     /**
      * Obtiene un parametro de donde sea que fue recibido
      * @param string $name
@@ -32,6 +28,12 @@ abstract class BaseApiController extends \MIABase\Controller\BaseController
      */
     protected function getParam($name, $default = '')
     {
+        // Procesar los parametros si es enviado como JSON.
+        if(!$this->hasValidateParams){
+            $this->validateParams();
+            $this->hasValidateParams = true;
+        }
+        
         if(is_object($this->values) && $this->values->{$name} != $default){
             return $this->values->{$name};
         }
