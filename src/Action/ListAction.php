@@ -70,13 +70,18 @@ class ListAction extends Base
         
         $select->where->addPredicate(new \Zend\Db\Sql\Predicate\Expression($sql));
     }
+    
+    protected function fetchAll()
+    {
+        return $this->table->fetchAll();
+    }
 
     public function execute()
     {
         return new ViewModel(array(
             'service' => $this,
             'paginator' => $this->createPaginator(),
-            'items' => $this->table->fetchAll()
+            'items' => $this->fetchAll()
         ));
     }
     

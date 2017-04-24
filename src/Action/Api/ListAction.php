@@ -7,7 +7,7 @@ namespace MIABase\Action\Api;
  *
  * @author matiascamiletti
  */
-class ListAction extends \MIABase\Action\Base
+class ListAction extends \MIABase\Action\ListAction
 {
     
     protected function createSelect()
@@ -25,6 +25,9 @@ class ListAction extends \MIABase\Action\Base
     
     protected function fetchAll()
     {
+        if(method_exists($this->controller, 'configListData')){
+            return $this->controller->configListData($this->table->getTableGateway()->selectWith($this->createSelect())->toArray());
+        }
         return $this->table->getTableGateway()->selectWith($this->createSelect())->toArray();
     }
     
