@@ -16,4 +16,6 @@ abstract class CrudController extends BaseApiController
         $action->setController($this);
         return $action->execute();
     }
+    
+    protected function configAction($action){}
 }
