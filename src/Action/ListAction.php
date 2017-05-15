@@ -20,6 +20,11 @@ class ListAction extends Base
     protected $wheres = array();
     
     protected $joins = array();
+    /**
+     * Almacena para ordenar la Query
+     * @var string|array
+     */
+    protected $order = null;
     
     protected function createPaginator()
     {
@@ -97,5 +102,13 @@ class ListAction extends Base
             'on' => $on,
             'columns' => $columns
         );
+    }
+    /**
+     * Configura el orden del SQL
+     * @param string|array $order
+     */
+    public function setOrder($order)
+    {
+        $this->order = $order;
     }
 }

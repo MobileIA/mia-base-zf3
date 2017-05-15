@@ -72,8 +72,12 @@ class Base
     public function exchangeObject($data)
     {
         $this->id = $data->id;
-        $this->createdAt = $data->createdAt;
-        $this->updatedAt = $data->updatedAt;
+        if($data->createdAt){
+            $this->createdAt = $data->createdAt;
+        }
+        if($data->updatedAt){
+            $this->updatedAt = $data->updatedAt;
+        }
     }
     
     public function refreshUpdate()
