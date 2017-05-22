@@ -21,6 +21,11 @@ abstract class CrudController extends BaseController
     protected $template = '';
     
     /**
+     * Para cambiar el part de listado facilmente
+     * @var string
+     */
+    protected $partListName = '\MIABase\Action\ListAction';
+    /**
      * Para cambiar el part de agregar facilmente
      * @var string
      */
@@ -44,7 +49,7 @@ abstract class CrudController extends BaseController
     
     public function indexAction()
     {
-        $action = new \MIABase\Action\ListAction();
+        $action = new $this->partListName();
         $action->setTable($this->getTable());
         $action->setController($this);
         $action->setRoute($this->route);
