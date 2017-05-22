@@ -45,6 +45,9 @@ class Add extends Base
     {
         $this->model->exchangeArray($this->form->getData());
         $this->table->save($this->model);
+        if(method_exists($this->controller, 'modelSaved')){
+            $this->controller->modelSaved($this->model);
+        }
         
         return $this->controller->redirect()->toRoute($this->route . '/list');
     }
