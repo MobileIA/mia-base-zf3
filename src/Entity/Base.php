@@ -71,7 +71,9 @@ class Base
     
     public function exchangeObject($data)
     {
-        $this->id = $data->id;
+        if($data->id){
+            $this->id = $data->id;
+        }
         if($data->createdAt){
             $this->createdAt = $data->createdAt;
         }

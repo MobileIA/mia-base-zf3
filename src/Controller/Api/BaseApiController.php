@@ -26,7 +26,7 @@ abstract class BaseApiController extends \MIABase\Controller\BaseController
      * @param mixed $default
      * @return mixed
      */
-    protected function getParam($name, $default = '')
+    public function getParam($name, $default = '')
     {
         // Procesar los parametros si es enviado como JSON.
         if(!$this->hasValidateParams){
