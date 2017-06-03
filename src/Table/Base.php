@@ -88,6 +88,17 @@ class Base
         return $row;
     }
     /**
+     * Funcion que obtiene los registros a traves de los IDs seleccionados
+     * @param array $ids Contiene los IDs de los registros a buscar
+     * @return ResulSet
+     */
+    public function fetchAllByIds($ids)
+    {
+        return $this->tableGateway->select(function (\Zend\Db\Sql\Select $select) use ($ids) {
+            $select->where(new \Zend\Db\Sql\Predicate\Expression('id IN ('.implode(',', $ids).')'));
+        });
+    }
+    /**
      * 
      * @return ResultSet
      */
