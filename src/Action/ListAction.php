@@ -25,6 +25,11 @@ class ListAction extends Base
      * @var string|array
      */
     protected $order = null;
+    /**
+     * Limite para la consulta SQL
+     * @var int
+     */
+    protected $limit = -1;
     
     protected function createPaginator()
     {
@@ -110,5 +115,13 @@ class ListAction extends Base
     public function setOrder($order)
     {
         $this->order = $order;
+    }
+    /**
+     * Configura el limite del SQL
+     * @param int $limit
+     */
+    public function setLimit($limit)
+    {
+        $this->limit = $limit;
     }
 }

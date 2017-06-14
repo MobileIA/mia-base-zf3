@@ -58,7 +58,7 @@ abstract class BaseApiController extends \MIABase\Controller\BaseController
     {
         $body = $this->getRequest()->getContent();
         
-        if($body == ''){
+        if($body == '' || (substr($body, 0, 1) != '{' && (substr($body, 0, 1) != '['))){
             return false;
         }
         
