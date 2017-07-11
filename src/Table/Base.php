@@ -99,6 +99,17 @@ class Base
         });
     }
     /**
+     * Obtiene el total de registros de la tabla
+     * @return int
+     */
+    public function total()
+    {
+        $select = $this->tableGateway->getSql()->select();
+        $select->columns(array('total' => new \Zend\Db\Sql\Predicate\Expression('COUNT(*)')));
+        $result = $this->tableGateway->getSql()->prepareStatementForSqlObject($select)->execute()->getResource()->fetch();
+        return $result['total'];
+    }
+    /**
      * 
      * @return ResultSet
      */
