@@ -29,6 +29,16 @@ class Base
      * @var \Zend\InputFilter\InputFilter
      */
     protected $inputFilter;
+    /**
+     *
+     * @var boolean
+     */
+    protected $hasCreatedAt = true;
+    /**
+     *
+     * @var boolean
+     */
+    protected $hasUpdatedAt = true;
     
     /**
      * 
@@ -45,11 +55,16 @@ class Base
      */
     public function toArray()
     {
-        return array(
-            'id' => $this->id,
-            'created_at' => $this->createdAt,
-            'updated_at' => $this->updatedAt
-        );
+        $data = array('id' => $this->id);
+        // Verificar si tiene fecha de creación
+        if($this->hasCreatedAt){
+            $data['created_at'] = $this->createdAt;
+        }
+        // Verificar si tiene fecha de actualización
+        if($this->hasUpdatedAt){
+            $data['updated_at'] = $this->updatedAt;
+        }
+        return $data;
     }
     
     public function exchange($data)
@@ -65,8 +80,14 @@ class Base
     {
         $date = new \DateTime();
         $this->id = (!empty($data['id'])) ? $data['id'] : null;
-        $this->createdAt = (!empty($data['created_at'])) ? $data['created_at'] : $date->format('Y-m-d H:i:s');
-        $this->updatedAt = (!empty($data['updated_at'])) ? $data['updated_at'] : $date->format('Y-m-d H:i:s');
+        // Verificar si tiene fecha de creación
+        if($this->hasCreatedAt){
+            $this->createdAt = (!empty($data['created_at'])) ? $data['created_at'] : $date->format('Y-m-d H:i:s');
+        }
+        // Verificar si tiene fecha de actualización
+        if($this->hasUpdatedAt){
+            $this->updatedAt = (!empty($data['updated_at'])) ? $data['updated_at'] : $date->format('Y-m-d H:i:s');
+        }
     }
     
     public function exchangeObject($data)
@@ -84,6 +105,10 @@ class Base
     
     public function refreshUpdate()
     {
+        // Verificar si tiene fecha de actualización
+        if(!$this->hasUpdatedAt){
+            return false;
+        }
         $date = new \DateTime();
         $this->updatedAt = $date->format('Y-m-d H:i:s');
     }
