@@ -41,4 +41,18 @@ class Base extends \Zend\Form\Form
         }
         return true;
     }
+    /**
+     *
+     * @param bool $onlyBase
+     */
+    public function populateValues($data, $onlyBase = false)
+    {
+        parent::populateValues($data);
+        // Popular los FieldSet personalizados que contenga este formulario
+        foreach ($this->iterator as $name => $elementOrFieldset) {
+            if ($elementOrFieldset instanceof \Zend\Form\FieldsetInterface) {
+                $elementOrFieldset->populateValues($data);
+            }
+        }
+    }
 }

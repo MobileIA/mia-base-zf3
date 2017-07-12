@@ -4,6 +4,20 @@
  * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
  */
 
-return array(
+namespace MIABase;
 
+return array(
+    'service_manager' => [
+        'factories' => [
+            Library\GoogleMaps::class => Library\GoogleMapsFactory::class,
+        ]
+    ],
+    'view_helpers' => [
+        'aliases' => [
+            'googleMapsKey' => View\Helper\GoogleMapsKey::class,
+        ],
+        'factories' => [
+            View\Helper\GoogleMapsKey::class => View\Helper\GoogleMapsKeyFactory::class,
+        ],
+    ]
 );
