@@ -43,6 +43,10 @@ class Add extends Base
     
     protected function save()
     {
+        // Verificar si tiene customizaciones del formulario
+        if(method_exists($this->controller, 'prepareCustomForm')){
+            $this->controller->prepareCustomForm($this, $this->form);
+        }
         $this->model->exchangeArray($this->form->getData());
         $this->table->save($this->model);
         if(method_exists($this->controller, 'modelSaved')){
