@@ -25,7 +25,7 @@ class GoogleMapsFieldset extends \Zend\Form\Fieldset
         
         $this->add([
             'name' => 'address',
-            'type' => Address::class,
+            'type' => 'text',
             'options' => [
                 'label' => 'Dirección'
             ],
