@@ -59,6 +59,7 @@ abstract class CrudController extends BaseController
         
         $view = $action->execute();
         $view->setVariable('route', $this->route);
+        $view->setVariable('string', $this->getStrings());
         $view->setTemplate($this->template . '/table/simple');
         
         return $view;
@@ -74,6 +75,8 @@ abstract class CrudController extends BaseController
         $this->configAction($action);
         
         $view = $action->execute();
+        $view->setVariable('route', $this->route);
+        $view->setVariable('string', $this->getStrings());
         $view->setTemplate($this->template . '/form/simple');
         
         return $view;
@@ -90,6 +93,7 @@ abstract class CrudController extends BaseController
         
         $view = $action->execute();
         $view->setVariable('route', $this->route);
+        $view->setVariable('string', $this->getStrings());
         $view->setTemplate($this->template . '/form/simple');
         
         return $view;
@@ -113,6 +117,17 @@ abstract class CrudController extends BaseController
         }
         
         $this->layout()->setTemplate($this->template);
+    }
+    
+    protected function getStrings()
+    {
+        return array(
+            'main_title' => 'Nombre APP',
+            'main_caption' => 'Administración del listado',
+            'title' => 'Listado',
+            'main_title_add' => 'Nuevo',
+            'main_caption_add' => 'Administración del listado',
+        );
     }
     
     protected function configAction($action){}
