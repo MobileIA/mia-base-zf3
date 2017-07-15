@@ -25,10 +25,18 @@ class ListAction extends \MIABase\Action\ListAction
     
     protected function fetchAll()
     {
-        if(method_exists($this->controller, 'configListData')){
-            return $this->controller->configListData($this->table->getTableGateway()->selectWith($this->createSelect())->toArray());
+        // Creamos Select
+        $select = $this->createSelect();
+        // Verificamos si hay una configuración del controlador para el select
+        if(method_exists($this->controller, 'configSelect')){
+            // Configuramos select para customizaciones
+            $select = $this->controller->configSelect($select);
         }
-        return $this->table->getTableGateway()->selectWith($this->createSelect())->toArray();
+        
+        if(method_exists($this->controller, 'configListData')){
+            return $this->controller->configListData($this->table->getTableGateway()->selectWith($select)->toArray());
+        }
+        return $this->table->getTableGateway()->selectWith($select)->toArray();
     }
     
     public function execute()
