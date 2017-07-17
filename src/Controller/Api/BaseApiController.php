@@ -59,7 +59,9 @@ abstract class BaseApiController extends \MIABase\Controller\BaseController
         $body = $this->getRequest()->getContent();
         
         if($body == '' || (substr($body, 0, 1) != '{' && (substr($body, 0, 1) != '['))){
-            return false;
+            // Buscamos parametros por POST o Query
+            $this->values = array_merge($this->params()->fromQuery(), $this->params()->fromPost());
+            return true;
         }
         
         try {
