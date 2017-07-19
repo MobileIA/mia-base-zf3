@@ -17,8 +17,14 @@ class Relation extends \MIABase\Action\Edit
     
     protected function save()
     {
+        // Copiamos datos antes de editar
+        $this->old->exchange($this->getModel()->toArray());
         $this->model->exchangeArray($this->form->getData());
         $this->table->save($this->model);
+        // Verificamos si existe una funcionalidad extra al ser editado
+        if(method_exists($this->controller, 'modelEdited')){
+            $this->controller->modelEdited($this->old, $this->model);
+        }
         
         return $this->controller->redirect()->toRoute($this->route . '/list', array('id' => $this->model->{$this->relationColumn}));
     }
