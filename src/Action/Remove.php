@@ -21,6 +21,10 @@ class Remove extends Base
         if($item === null){
             return;
         }
+        // Verificamos si existe una funcionalidad extra al ser eliminado
+        if(method_exists($this->controller, 'modelDeleted')){
+            $this->controller->modelDeleted($item);
+        }
         $this->table->deleteById($item->id);
         
         return $this->controller->redirect()->toRoute($this->route . '/list');
