@@ -21,6 +21,22 @@ abstract class BaseApiController extends \MIABase\Controller\BaseController
     protected $hasValidateParams = false;
     
     /**
+     * Handler que maneja las llamadas a los actions.
+     * @param \Zend\Mvc\MvcEvent $e
+     */
+    public function onDispatch(\Zend\Mvc\MvcEvent $e)
+    {
+        // Manejamos las excepciones de la API
+        try {
+            parent::onDispatch($e);
+        } catch (ApiException $exc) {
+            // Creamos repuesta para el error
+            $e->setViewModel($this->executeErrorCode($exc->getCode(), $exc->getMessage()));
+            // Paramos la ejecución
+            $e->stopPropagation();
+        }
+    }
+    /**
      * Obtiene un parametro de donde sea que fue recibido
      * @param string $name
      * @param mixed $default
