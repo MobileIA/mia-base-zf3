@@ -37,6 +37,25 @@ abstract class BaseApiController extends \MIABase\Controller\BaseController
         }
     }
     /**
+     * Funcion que se encarga de verificar si los parametros requeridos fueron enviados.
+     * @param array $params
+     * @throws ApiException
+     */
+    public function checkRequiredParams($params)
+    {
+        // Recorremos los parametros requeridos
+        foreach($params as $key){
+            // Obtenemos parametro
+            $value = $this->getParam($key, null);
+            // Verificamos si es nulo
+            if($value !== null){
+                continue;
+            }
+            // Si no exist arrojar exception
+            throw new ApiException('Parametro requerido: ' . $key, 410);
+        }
+    }
+    /**
      * Obtiene un parametro de donde sea que fue recibido
      * @param string $name
      * @param mixed $default
