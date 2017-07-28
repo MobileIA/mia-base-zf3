@@ -99,6 +99,21 @@ class Base
         });
     }
     /**
+     * Determina si un registro por ID existe
+     * @param int $id
+     * @return boolean
+     */
+    public function exist($id)
+    {
+        // Buscar registro por ID
+        $row = $this->fetchById($id);
+        // verificar si existe
+        if($row === null){
+            return false;
+        }
+        return true;
+    }
+    /**
      * Obtiene el total de registros de la tabla
      * @return int
      */
