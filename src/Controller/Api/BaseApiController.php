@@ -99,4 +99,14 @@ abstract class BaseApiController extends \MIABase\Controller\BaseController
             'response' => $data
         ));
     }
+    /**
+     * Genera un modelo JSON como respuesta a un error
+     * @param int $code
+     * @param string $message
+     * @return \Zend\View\Model\JsonModel
+     */
+    public function executeErrorCode($code, $message)
+    {
+        return $this->executeError(array('code' => $code, 'message' => $message));
+    }
 }
