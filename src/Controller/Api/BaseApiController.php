@@ -131,7 +131,7 @@ abstract class BaseApiController extends \MIABase\Controller\BaseController
     {
         return new \Zend\View\Model\JsonModel(array(
             'success' => false, 
-            'response' => $data
+            'error' => $data
         ));
     }
     /**
