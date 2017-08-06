@@ -15,4 +15,6 @@ class Error
     const INVALID_ACCESS_TOKEN = array('code' => 413, 'message' => 'El accessToken enviado es incorrecto.');
     const USER_NOT_REGISTERED = array('code' => 414, 'message' => 'El usuario no se encuentra registrado.');
     const INVALID_GRANT_TYPE = array('code' => 415, 'message' => 'El grantType enviado no es valido.');
+    const INVALID_REGISTER_TYPE = array('code' => 416, 'message' => 'El registerType enviado no es valido.');
+    const USER_REGISTERED = array('code' => 417, 'message' => 'El usuario ya se encuentra registrado.');
 }

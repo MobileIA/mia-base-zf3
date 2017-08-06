@@ -52,7 +52,7 @@ abstract class BaseApiController extends \MIABase\Controller\BaseController
                 continue;
             }
             // Si no exist arrojar exception
-            throw new ApiException('Parametro requerido: ' . $key, 410);
+            throw new ApiException(Error::REQUIRED_PARAMS);
         }
     }
     /**
