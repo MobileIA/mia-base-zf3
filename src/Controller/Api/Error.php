@@ -17,4 +17,5 @@ class Error
     const INVALID_GRANT_TYPE = array('code' => 415, 'message' => 'El grantType enviado no es valido.');
     const INVALID_REGISTER_TYPE = array('code' => 416, 'message' => 'El registerType enviado no es valido.');
     const USER_REGISTERED = array('code' => 417, 'message' => 'El usuario ya se encuentra registrado.');
+    const INVALID_PASSWORD = array('code' => 418, 'message' => 'La contraseña indicada no coincide.');
 }
