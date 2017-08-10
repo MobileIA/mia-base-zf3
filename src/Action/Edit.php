@@ -42,7 +42,7 @@ class Edit extends Add
         return $this->controller->redirect()->toRoute($this->route . '/list');
     }
     
-    protected function getModel()
+    public function getModel()
     {
         if($this->model == null){
             $itemId = $this->controller->params()->fromRoute('id');

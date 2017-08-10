@@ -70,7 +70,7 @@ abstract class Base
      * Crea el modelo Entidad
      * @return mixed
      */
-    protected function getModel()
+    public function getModel()
     {
         if($this->model == null){
             $className = $this->table->getEntityClass();

@@ -93,7 +93,7 @@ abstract class CrudController extends BaseController
         
         $view = $action->execute();
         $view->setVariable('route', $this->route);
-        $view->setVariable('string', $this->getStrings());
+        $view->setVariable('string', $this->getStringsEdit($action->getModel()));
         $view->setTemplate($this->template . '/form/simple');
         
         return $view;
@@ -120,6 +120,21 @@ abstract class CrudController extends BaseController
     }
     
     protected function getStrings()
+    {
+        return array(
+            'main_title' => 'Nombre APP',
+            'main_caption' => 'Administración del listado',
+            'title' => 'Listado',
+            'main_title_add' => 'Nuevo',
+            'main_caption_add' => 'Administración del listado',
+        );
+    }
+    /**
+     * 
+     * @param \MIABase\Entity\Base $model
+     * @return array
+     */
+    protected function getStringsEdit($model)
     {
         return array(
             'main_title' => 'Nombre APP',
