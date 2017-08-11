@@ -9,7 +9,7 @@ namespace MIABase\Action;
  */
 class Remove extends Base
 {
-    protected function getModel()
+    public function getModel()
     {
         $itemId = $this->controller->params()->fromRoute('id');
         return $this->table->fetchById($itemId);
