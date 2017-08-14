@@ -40,6 +40,11 @@ abstract class CrudController extends BaseController
      * @var string
      */
     protected $partRemoveName = '\MIABase\Action\Remove';
+    /**
+     * Para cambiar el part de ver facilmente
+     * @var string
+     */
+    protected $partViewName = '\MIABase\Action\View';
     
     public function onDispatch(\Zend\Mvc\MvcEvent $e)
     {
@@ -108,6 +113,20 @@ abstract class CrudController extends BaseController
         $this->configAction($action);
         
         $action->execute();
+    }
+    /**
+     * 
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function viewAction()
+    {
+        $action = new $this->partViewName();
+        $action->setTable($this->getTable());
+        $action->setController($this);
+        $action->setRoute($this->route);
+        $this->configAction($action);
+        
+        return $action->execute();
     }
     
     protected function dispatchTemplate()
