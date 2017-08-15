@@ -141,6 +141,7 @@ abstract class CrudController extends BaseController
     protected function getStrings()
     {
         return array(
+            'title_page' => 'Backend',
             'main_title' => 'Nombre APP',
             'main_caption' => 'Administración del listado',
             'title' => 'Listado',
@@ -156,6 +157,7 @@ abstract class CrudController extends BaseController
     protected function getStringsEdit($model)
     {
         return array(
+            'title_page' => 'Backend',
             'main_title' => 'Nombre APP',
             'main_caption' => 'Administración del listado',
             'title' => 'Listado',
