@@ -53,6 +53,10 @@ class ListAction extends Base
         }
         //Search
         $this->executeSearch($select);
+        // Verificar si los registros se eliminan por columna
+        if($this->table->hasDeleted()){
+            $select->where->addPredicate(new \Zend\Db\Sql\Predicate\Expression('deleted = 0'));
+        }
         
         return $select;
     }

@@ -35,6 +35,11 @@ class Base
      */
     protected $entityClass = '';
     /**
+     * Determina si el registro se elimina o se setea eliminado en la columna
+     * @var boolean
+     */
+    protected $hasDeleted = false;
+    /**
      * 
      * @param AdapterInterface $adapter
      */
@@ -139,7 +144,11 @@ class Base
      */
     public function deleteById($id)
     {
-        $this->tableGateway->delete(array('id' => (int) $id));
+        if($this->hasDeleted){
+            $this->tableGateway->update(array('deleted' => 1), array('id' => $id));
+        }else{
+            $this->tableGateway->delete(array('id' => (int) $id));
+        }
     }
     /**
      * 
@@ -174,5 +183,13 @@ class Base
     public function getEntityClass()
     {
         return $this->entityClass;
+    }
+    /**
+     * 
+     * @return boolean
+     */
+    public function hasDeleted()
+    {
+        return $this->hasDeleted;
     }
 }
