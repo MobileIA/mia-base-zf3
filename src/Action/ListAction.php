@@ -51,6 +51,10 @@ class ListAction extends Base
         foreach($this->wheres as $predicate){
             $select->where->addPredicate($predicate);
         }
+        // Configurar el orden
+        if($this->order !== null){
+            $select->order($this->order);
+        }
         //Search
         $this->executeSearch($select);
         // Verificar si los registros se eliminan por columna
