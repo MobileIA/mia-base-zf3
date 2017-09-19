@@ -17,6 +17,14 @@ abstract class CrudController extends BaseApiController
         return $action->execute();
     }
     
+    public function viewAction()
+    {
+        $action = new \MIABase\Action\Api\View();
+        $action->setTable($this->getTable());
+        $action->setController($this);
+        return $action->execute();
+    }
+    
     protected function configAction($action){}
     /**
      * Metodo que se encarga de obtener los datos obtenidos antes de enviarlos a convertir a JSON.
