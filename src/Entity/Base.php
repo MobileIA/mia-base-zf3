@@ -92,13 +92,13 @@ class Base
     
     public function exchangeObject($data)
     {
-        if($data->id){
+        if(isset($data->id)){
             $this->id = $data->id;
         }
-        if($data->createdAt){
+        if(isset($data->createdAt)){
             $this->createdAt = $data->createdAt;
         }
-        if($data->updatedAt){
+        if(isset($data->updatedAt)){
             $this->updatedAt = $data->updatedAt;
         }
     }
