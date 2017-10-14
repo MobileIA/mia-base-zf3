@@ -61,8 +61,13 @@ class ListAction extends Base
         if($this->table->hasDeleted()){
             $select->where->addPredicate(new \Zend\Db\Sql\Predicate\Expression('deleted = 0'));
         }
-        
-        return $select;
+        // Verificamos si hay una configuración del controlador para el select
+        if(method_exists($this->controller, 'configSelect')){
+            // Configuramos select para customizaciones
+            return $this->controller->configSelect($select);
+        }else{
+            return $select;
+        }
     }
     
     protected function executeSearch(\Zend\Db\Sql\Select $select)
