@@ -139,6 +139,16 @@ class Base
     }
     /**
      * 
+     * @param \Zend\Db\Sql\Select $select
+     * @return array
+     */
+    public function executeQuery($select)
+    {
+        $result = $this->tableGateway->getSql()->prepareStatementForSqlObject($select)->execute();
+        return $result->getResource()->fetchAll(\PDO::FETCH_ASSOC);
+    }
+    /**
+     * 
      * @param int $id
      * @return int
      */

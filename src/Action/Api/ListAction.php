@@ -34,9 +34,9 @@ class ListAction extends \MIABase\Action\ListAction
         }
         
         if(method_exists($this->controller, 'configListData')){
-            return $this->controller->configListData($this->table->getTableGateway()->selectWith($select)->toArray());
+            return $this->controller->configListData($this->table->executeQuery($select));
         }
-        return $this->table->getTableGateway()->selectWith($select)->toArray();
+        return $this->table->executeQuery($select);
     }
     
     public function execute()
