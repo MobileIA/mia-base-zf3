@@ -57,6 +57,8 @@ class ListAction extends Base
         }
         //Search
         $this->executeSearch($select);
+        // Procesar si existen filtros
+        $this->executeFilters($select);
         // Verificar si los registros se eliminan por columna
         if($this->table->hasDeleted()){
             $select->where->addPredicate(new \Zend\Db\Sql\Predicate\Expression('deleted = 0'));
@@ -67,6 +69,33 @@ class ListAction extends Base
             return $this->controller->configSelect($select);
         }else{
             return $select;
+        }
+    }
+    
+    /**
+     * Funcion que se encarga de procesar si existen filtros
+     * @param \Zend\Db\Sql\Select $select
+     */
+    protected function executeFilters(\Zend\Db\Sql\Select $select)
+    {
+        // Obtenemos todos los parametros enviados
+        $params = $this->controller->params()->fromQuery();
+        // Recorremos los parametros
+        foreach($params as $param => $value){
+            // Verificar si es para un filtro
+            if(stripos($param, '_filter') === false){
+                continue;
+            }
+            // Verificar si el value es correcto
+            if($value == ''||$value == '-1'||$value == '0'){
+                continue;
+            }
+            // Convertirmos el parametro en la columna
+            $column = str_replace('_filter', '', $param);
+            // Agregamos busqueda en la query
+            $select->where->addPredicate(new \Zend\Db\Sql\Predicate\Expression($column . ' = ?', $value));
+            // Almacenamos el valor para que se pueda obtener en la vista
+            $this->addOption($param, $value);
         }
     }
     
