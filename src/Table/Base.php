@@ -148,6 +148,15 @@ class Base
         return $result->getResource()->fetchAll(\PDO::FETCH_ASSOC);
     }
     /**
+     * Convierte el Select en un String
+     * @param \Zend\Db\Sql\Select $select
+     * @return string
+     */
+    public function buildQuery($select)
+    {
+        return $this->tableGateway->getSql()->buildSqlString($select);
+    }
+    /**
      * 
      * @param int $id
      * @return int
