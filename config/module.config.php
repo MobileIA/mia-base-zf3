@@ -10,6 +10,7 @@ return array(
     'service_manager' => [
         'factories' => [
             Library\GoogleMaps::class => Library\GoogleMapsFactory::class,
+            View\Strategy\AngularStrategy::class => View\Strategy\AngularStrategyFactory::class
         ]
     ],
     'view_helpers' => [
@@ -19,5 +20,10 @@ return array(
         'factories' => [
             View\Helper\GoogleMapsKey::class => View\Helper\GoogleMapsKeyFactory::class,
         ],
-    ]
+    ],
+    'view_manager' => array(
+        'strategies' => array(
+            View\Strategy\AngularStrategy::class
+        ),
+    ),
 );
