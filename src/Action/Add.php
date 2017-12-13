@@ -35,7 +35,13 @@ class Add extends Base
     
     protected function isValid()
     {
-        $this->form->setInputFilter($this->getModel()->getInputFilter());
+        // Verificamos si existe el metodo de InputFilter dentro del formulario
+        if(method_exists($this->form, 'addInputFilter')){
+            $this->form->addInputFilter();
+        }else{
+            // Deprecated
+            $this->form->setInputFilter($this->getModel()->getInputFilter());
+        }
         $this->form->setData($this->controller->getRequest()->getPost());
 
         if (! $this->form->isValid()) {
