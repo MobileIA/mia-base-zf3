@@ -37,6 +37,9 @@ class Add extends Base
     {
         // Verificamos si existe el metodo de InputFilter dentro del formulario
         if(method_exists($this->form, 'addInputFilter')){
+            // generar Modelo
+            $this->getModel();
+            // Setear InputFilter
             $this->form->addInputFilter();
         }else{
             // Deprecated
