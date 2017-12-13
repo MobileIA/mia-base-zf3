@@ -169,5 +169,4 @@ abstract class CrudController extends BaseController
     protected function configAction($action){}
     
     abstract function columns();
-    abstract function fields();
 }
