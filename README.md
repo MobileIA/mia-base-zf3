@@ -41,3 +41,50 @@ class RankingController extends \MIABase\Controller\Api\CrudController
         return $select;
     }
 ```
+
+# Recursos para la creación de ABM para Backend/Panel de administración:
+## Creación del controlador
+
+1. Estructura inicial para el controlador que se encarga del ABM.
+```php
+namespace Backend\Controller;
+
+class EventController extends \MIABase\Controller\CrudController
+{
+    protected $tableName = \Application\Table\EventTable::class;
+
+    protected $formName = \Backend\Form\Event::class;
+
+    protected $template = 'mia-layout-lte';
+
+    protected $route = 'event';
+    
+    public function columns()
+    {
+        return array(
+            array('type' => 'int', 'title' => 'ID', 'field' => 'id', 'is_search' => true),
+            array('type' => 'string', 'title' => 'Nombre', 'field' => 'firstname', 'is_search' => true),
+            array('type' => 'string', 'title' => 'Apellido', 'field' => 'lastname', 'is_search' => true),
+            array('type' => 'string', 'title' => 'Email', 'field' => 'email', 'is_search' => true),
+            array('type' => 'image', 'title' => 'Foto', 'field' => 'photo', 'is_search' => true),
+            array('type' => 'string', 'title' => 'Telefono', 'field' => 'phone', 'is_search' => true),
+            //array('type' => 'actions', 'title' => 'Acciones', 'more' => $this->getMoreActions())
+        );
+    }
+}
+```
+
+. El archivo de la tabla debe heredar de: \MIABase\Table\Base
+. El archivo del formulario debe heredar de: \MIABase\Form\Base
+
+2. Se puede agregar funcionalidad extra despues de la creación de un nuevo registro, generando el siguiente metodo:
+```php
+    /**
+     * Funcion que se llama despues de guardar un elemento
+     * @param \MIABase\Entity\Base $element
+     */
+    public function modelSaved($element)
+    {
+        // La funcion que se requiera realizar
+    }
+```
