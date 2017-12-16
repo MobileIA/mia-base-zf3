@@ -78,6 +78,23 @@ class Base
         }
     }
     /**
+     * Funcion para agregar un registro con un array de datos
+     * @param array $params
+     * @return int
+     */
+    public function insert(array $params)
+    {
+        // Verificamos si existe el campo ID y si es mayor a cero para actualizar
+        if(array_key_exists('id', $params) && ((int)$params['id']) > 0){
+            $this->tableGateway->update($params, array('id' => $params['id']));
+            return (int)$params['id'];
+        }
+        // Si no tiene el campo ID o es igual a cero se crea un nuevo registro
+        $this->tableGateway->insert($params);
+        // Devolvemos ultimo ID ingresado
+        return $this->tableGateway->getLastInsertValue();
+    }
+    /**
      * 
      * @param int $id
      * @return array|\ArrayObject|null
