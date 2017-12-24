@@ -88,3 +88,19 @@ class EventController extends \MIABase\Controller\CrudController
         // La funcion que se requiera realizar
     }
 ```
+
+3. Configurar la Query para obtener los datos del listado:
+```php
+    /**
+     * Configura la query para el listado
+     * @param \Zend\Db\Sql\Select $select
+     * @return \Zend\Db\Sql\Select
+     */
+    public function configSelect($select)
+    {
+        // Lo que requieras realizar:
+        
+        // Devolvemos select personalizado
+        return $select;
+    }
+```
