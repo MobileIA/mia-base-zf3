@@ -104,3 +104,10 @@ class EventController extends \MIABase\Controller\CrudController
         return $select;
     }
 ```
+
+# Helper para las vistas
+1. "miaDate", Helper para imprimir fechas, ejemplo:
+```php
+    // Fecha, Formato de salida, Formato de entrada (Opcional)
+    <?php echo $this->miaDate($event['start_date'], 'l d \d\e M\. - H:i'); ?>
+```
