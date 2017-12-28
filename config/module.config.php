@@ -6,6 +6,8 @@
 
 namespace MIABase;
 
+use Zend\ServiceManager\Factory\InvokableFactory;
+
 return array(
     'service_manager' => [
         'factories' => [
@@ -16,9 +18,11 @@ return array(
     'view_helpers' => [
         'aliases' => [
             'googleMapsKey' => View\Helper\GoogleMapsKey::class,
+            'miaDate' => View\Helper\MiaDate::class,
         ],
         'factories' => [
             View\Helper\GoogleMapsKey::class => View\Helper\GoogleMapsKeyFactory::class,
+            View\Helper\MiaDate::class => InvokableFactory::class
         ],
     ],
     'view_manager' => array(
