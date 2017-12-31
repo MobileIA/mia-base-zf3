@@ -22,15 +22,22 @@ class GoogleMapsFieldset extends \Zend\Form\Fieldset
     public function __construct($name = null, $options = [])
     {
         parent::__construct($name, $options);
-        
+        // Verificar si se seteo el nombre del elemento
+        if(array_key_exists('name', $options)){
+            $nameInput = $options['name'];
+        }else{
+            $nameInput = 'address';
+        }
+        // Setear nombre
+        $this->setName($nameInput);
         $this->add([
-            'name' => 'address',
+            'name' => $nameInput,
             'type' => 'text',
             'options' => [
                 'label' => 'Dirección'
             ],
             'attributes' => [
-                'id' => 'address',
+                'id' => $nameInput,
                 'placeholder' => 'Escribe una dirección'
             ]
         ]);
