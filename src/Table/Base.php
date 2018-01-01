@@ -222,6 +222,14 @@ class Base
     }
     /**
      * 
+     * @return string
+     */
+    public function getTableName()
+    {
+        return $this->tableName;
+    }
+    /**
+     * 
      * @return boolean
      */
     public function hasDeleted()

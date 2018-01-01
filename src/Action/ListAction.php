@@ -61,7 +61,7 @@ class ListAction extends Base
         $this->executeFilters($select);
         // Verificar si los registros se eliminan por columna
         if($this->table->hasDeleted()){
-            $select->where->addPredicate(new \Zend\Db\Sql\Predicate\Expression('deleted = 0'));
+            $select->where->addPredicate(new \Zend\Db\Sql\Predicate\Expression($this->table->getTableName() . '.deleted = 0'));
         }
         // Verificamos si hay una configuración del controlador para el select
         if(method_exists($this->controller, 'configSelect')){
