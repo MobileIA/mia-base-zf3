@@ -9,6 +9,12 @@ namespace MIABase\Form;
  */
 class Base extends \Zend\Form\Form
 {
+    /**
+     *
+     * @var \Zend\ServiceManager\ServiceLocatorInterface
+     */
+    protected $serviceManager = null;
+    
     public function __construct($name = null, $options = array())
     {
         parent::__construct($name, $options);
@@ -54,5 +60,21 @@ class Base extends \Zend\Form\Form
                 $elementOrFieldset->populateValues($data);
             }
         }
+    }
+    /**
+     * 
+     * @param \Zend\ServiceManager\ServiceLocatorInterface $container
+     */
+    public function setServiceManager($container)
+    {
+        $this->serviceManager = $container;
+    }
+    /**
+     * 
+     * @return \Zend\ServiceManager\ServiceLocatorInterface
+     */
+    public function getServiceManager()
+    {
+        return $this->serviceManager;
     }
 }

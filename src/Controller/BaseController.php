@@ -48,6 +48,7 @@ class BaseController extends AbstractActionController
     {
         if($this->form === null){
             $this->form = new $this->formName();
+            $this->form->setServiceManager($this->getServiceManager());
         }
         return $this->form;
     }
