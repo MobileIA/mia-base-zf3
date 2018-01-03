@@ -78,6 +78,11 @@ class ListAction extends Base
      */
     protected function executeFilters(\Zend\Db\Sql\Select $select)
     {
+        // Verificamos si hay una configuración del controlador para personalizar los filtros
+        if(method_exists($this->controller, 'configFilters')){
+            // Configuramos select para customizaciones
+            return $this->controller->configFilters($this, $select);
+        }
         // Obtenemos todos los parametros enviados
         $params = $this->controller->params()->fromQuery();
         // Recorremos los parametros
@@ -121,6 +126,8 @@ class ListAction extends Base
         }
         
         $select->where->addPredicate(new \Zend\Db\Sql\Predicate\Expression($sql));
+        // Almacenamos el valor para que se pueda obtener en la vista
+        $this->addOption('q_filter', $query);
     }
     
     protected function fetchAll()
