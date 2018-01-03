@@ -112,7 +112,7 @@ class ListAction extends Base
             return false;
         }
         
-        $sql = '';
+        $sql = '(';
         $first = true;
         foreach($this->getOption('columns', array()) as $column){
             if(array_key_exists('is_search', $column) && $column['is_search'] === true){
@@ -124,6 +124,7 @@ class ListAction extends Base
                 $sql .= $column['field'] . ' LIKE "%'.$query.'%"';
             }
         }
+        $sql .= ')';
         
         $select->where->addPredicate(new \Zend\Db\Sql\Predicate\Expression($sql));
         // Almacenamos el valor para que se pueda obtener en la vista
