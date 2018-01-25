@@ -121,7 +121,12 @@ class ListAction extends Base
                 }else{
                     $sql .= ' OR ';
                 }
-                $sql .= $column['field'] . ' LIKE "%'.$query.'%"';
+                if(array_key_exists('search_field', $column)){
+                    $fieldName = $column['search_field'];
+                }else{
+                    $fieldName = $column['field'];
+                }
+                $sql .= $fieldName . ' LIKE "%'.$query.'%"';
             }
         }
         $sql .= ')';
