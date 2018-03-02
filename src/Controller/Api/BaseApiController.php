@@ -69,7 +69,7 @@ abstract class BaseApiController extends \MIABase\Controller\BaseController
             $this->hasValidateParams = true;
         }
         
-        if(is_object($this->values) && isset($this->values->{$name}) && $this->values->{$name} != $default){
+        if(is_object($this->values) && property_exists($this->values, $name) && $this->values->{$name} != $default){
             return $this->values->{$name};
         }
         if(is_array($this->values) && array_key_exists($name, $this->values)){
