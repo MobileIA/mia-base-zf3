@@ -55,7 +55,7 @@ class Base
      */
     public function toArray()
     {
-        $data = array('id' => $this->id);
+        $data = array('id' => (int)$this->id);
         // Verificar si tiene fecha de creación
         if($this->hasCreatedAt){
             $data['created_at'] = $this->createdAt;
