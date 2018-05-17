@@ -52,16 +52,20 @@ class CSVHelper
             }
         }
         fclose($fp);
+        
+        header("Content-type: text/csv");
+        header("Content-Disposition: attachment; filename=" . $this->filename);
+        header("Pragma: no-cache");
+        header("Expires: 0");
+        
         echo ob_get_clean();
+        ob_end_flush();
         //$response->setContent(ob_get_clean());
         /*$response->getHeaders()->addHeaders(array(
             'Content-Type' => 'text/csv',
             'Content-Disposition' => 'attachment;filename="' . str_replace('"', '\\"', $this->filename) . '"',
         ));*/
-        header("Content-type: text/csv");
-        header("Content-Disposition: attachment; filename=" . $this->filename);
-        header("Pragma: no-cache");
-        header("Expires: 0");
+        
     }
     
     /**
