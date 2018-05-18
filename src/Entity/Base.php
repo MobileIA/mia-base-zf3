@@ -55,7 +55,7 @@ class Base
      */
     public function toArray()
     {
-        $data = array('id' => (int)$this->id);
+        $data = get_object_vars($this);
         // Verificar si tiene fecha de creación
         if($this->hasCreatedAt){
             $data['created_at'] = $this->createdAt;
@@ -64,6 +64,12 @@ class Base
         if($this->hasUpdatedAt){
             $data['updated_at'] = $this->updatedAt;
         }
+        // Eliminar innecesarios
+        unset($data['createdAt']);
+        unset($data['updatedAt']);
+        unset($data['hasCreatedAt']);
+        unset($data['hasUpdatedAt']);
+        unset($data['inputFilter']);
         return $data;
     }
     
@@ -88,6 +94,14 @@ class Base
         if($this->hasUpdatedAt){
             $this->updatedAt = (!empty($data['updated_at'])) ? $data['updated_at'] : $date->format('Y-m-d H:i:s');
         }
+        // Obtener todas las propiedades
+        $properties = get_object_vars($this);
+        // Recorremos las propiedades
+        foreach($properties as $property => $value){
+            if(!empty($data[$property])){
+                $this->{$property} = $data[$property];
+            }
+        }
     }
     
     public function exchangeObject($data)
@@ -100,6 +114,14 @@ class Base
         }
         if(isset($data->updatedAt)){
             $this->updatedAt = $data->updatedAt;
+        }
+        // Obtener todas las propiedades
+        $properties = get_object_vars($this);
+        // Recorremos las propiedades
+        foreach($properties as $property => $value){
+            if(isset($data->{$property})){
+                $this->{$property} = $data->{$property};
+            }
         }
     }
     
