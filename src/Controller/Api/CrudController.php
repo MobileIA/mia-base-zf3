@@ -41,4 +41,10 @@ abstract class CrudController extends BaseApiController
      * @param Object $entity
      */
     //public function configEditResponse($entity){};
+    /**
+     * Funcion que se ejecuta para validar los parametros enviados si fuera necesario al momento de agregar un nuevo registro
+     * @param array $params
+     * @return boolean
+     */
+    public function validatorParamsInAdd($params){ return true; }
 }
