@@ -47,4 +47,10 @@ abstract class CrudController extends BaseApiController
      * @return boolean
      */
     public function validatorParamsInAdd($params){ return true; }
+    /**
+     * Funcion que se ejecuta para validar los parametros enviados si fuera necesario al momento de editar un registro
+     * @param array $params
+     * @return boolean
+     */
+    public function validatorParamsInEdit($params){ return true; }
 }
